@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS newprogrammers CHARACTER SET utf8 COLLATE utf8_uni
 USE newprogrammers
 
 /* Creating Table users with the encoding utf8 */
-CREATE TABLE IF NOT EXISTS users(
+CREATE TABLE IF NOT EXISTS login_nodejs_users(
     id              INT(5) AUTO_INCREMENT NOT NULL,
     first_name      VARCHAR(100) NOT NULL,
     last_name       VARCHAR(100) NOT NULL,

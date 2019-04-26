@@ -4,7 +4,7 @@
   "description": "This is a Login with Forms to Sign In and Sign Up, Go below to see more information",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/App.js"
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
