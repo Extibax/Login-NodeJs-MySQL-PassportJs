@@ -54,7 +54,11 @@ body {
 }
 
 /* main section */
-.welcome-text {
+.main .welcome-text {
     text-align: center;
-    margin: 25vh 0;
+    margin: 25vh 0 0 0;
+}
+
+.main h3 {
+    color: #FFF;
 }
