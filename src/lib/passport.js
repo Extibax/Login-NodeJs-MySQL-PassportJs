@@ -2,39 +2,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const database = require('../database/database_connection');
-const { encryptPassword, matchPassword } = require('../lib/helper_pass');
-
-
-passport.use('local.signup', new LocalStrategy({
-
-    usernameField: 'username',
-    passwordField: 'password',
-    passReqToCallback: true
-
-}, async (req, username, password, done) => {
-
-    const { firstname } = req.body;
-
-    const { lastname } = req.body;
-
-    const newUser = {
-        username: username,
-        password: password,
-        first_name: firstname,
-        last_name: lastname
-    }
-
-    newUser.password = await encryptPassword(password);
-
-    const result = await database.query("INSERT INTO login_nodejs_users SET ?", [newUser]);
-
-    newUser.id = result.insertId;
-
-    console.log(result);
-
-    return done(null, newUser);
-
-}));
+const {
+    encryptPassword,
+    matchPassword
+} = require('../lib/helper_pass');
 
 passport.use('local.signin', new LocalStrategy({
 
@@ -63,9 +34,44 @@ passport.use('local.signin', new LocalStrategy({
 
     } else {
 
-        return done (null, false, req.flash('message', 'The username does not exists'));
+        return done(null, false, req.flash('message', 'The username does not exists'));
 
     }
+
+}));
+
+passport.use('local.signup', new LocalStrategy({
+
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+
+}, async (req, username, password, done) => {
+
+    const {
+        firstname
+    } = req.body;
+
+    const {
+        lastname
+    } = req.body;
+
+    const newUser = {
+        username: username,
+        password: password,
+        first_name: firstname,
+        last_name: lastname
+    }
+
+    newUser.password = await encryptPassword(password);
+
+    const result = await database.query("INSERT INTO login_nodejs_users SET ?", [newUser]);
+
+    newUser.id = result.insertId;
+
+    console.log(newUser);
+
+    return done(null, newUser, req.flash('success', 'Welcome user: ', newUser.username));
 
 }));
 
