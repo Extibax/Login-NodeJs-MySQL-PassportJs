@@ -34,7 +34,7 @@ app.engine('.hbs', expresshandlebars({
 app.set('view engine', '.hbs');
 
 
-/* Middlewars */
+/* Middlewares */
 app.use(express_session({
 
     secret: 'random_secrete_string',
